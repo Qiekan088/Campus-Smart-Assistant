@@ -8,10 +8,10 @@
 
 | 成员 | Skill | 技术主责 |
 |---|---|---|
-| A | [.agents/skills/campus-qa-a-frontend/SKILL.md](.agents/skills/campus-qa-a-frontend/SKILL.md) | 前端工程 |
-| B | [.agents/skills/campus-qa-b-backend/SKILL.md](.agents/skills/campus-qa-b-backend/SKILL.md) | 业务后端与数据库 |
-| C | [.agents/skills/campus-qa-c-retrieval/SKILL.md](.agents/skills/campus-qa-c-retrieval/SKILL.md) | 文档处理、Worker与检索 |
-| D | [.agents/skills/campus-qa-d-answer/SKILL.md](.agents/skills/campus-qa-d-answer/SKILL.md) | 在线问答与模型集成 |
+| A | [.agents/skills/campus-qa-a-frontend/SKILL.md](../.agents/skills/campus-qa-a-frontend/SKILL.md) | 前端工程 |
+| B | [.agents/skills/campus-qa-b-backend/SKILL.md](../.agents/skills/campus-qa-b-backend/SKILL.md) | 业务后端与数据库 |
+| C | [.agents/skills/campus-qa-c-retrieval/SKILL.md](../.agents/skills/campus-qa-c-retrieval/SKILL.md) | 文档处理、Worker与检索 |
+| D | [.agents/skills/campus-qa-d-answer/SKILL.md](../.agents/skills/campus-qa-d-answer/SKILL.md) | 在线问答与模型集成 |
 
 通用初始化提示：
 
@@ -33,4 +33,14 @@
 | 证据 | [证据索引](evidence/证据索引.md) | 尚无本轮实施证据 |
 | 课程依据 | [教师操作指引](references/架构设计后确认与分阶段实现操作指引.md) | 原文留存 |
 
-本轮服务器、公网、域名、云资源和部署运维不安排。先完成局域网联调和可重复启动说明。历史原型及八个DSH模拟会话不属于本轮四名同学已经完成的工作。
+本轮服务器、公网、域名、云资源和部署运维不安排。先完成同机双端口联调和可重复启动说明。历史原型及八个DSH模拟会话不属于本轮四名同学已经完成的工作。
+
+
+
+
+开发前必读[开发环境与容器规范](docs/开发环境与容器规范.md)：当前同机Compose、固定Node/npm、令牌及超时配置；容器文件已实现并通过本机环境验证。
+
+
+ENV-0.2已建立可运行环境骨架，见[启动指南](docs/团队开发环境启动说明.md)和[环境变更](docs/环境变更与升级流程.md)。问答模拟链未实现，不等于V0验收通过。
+
+

@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+node_modules/
+.venv/
+.lockenv/
+__pycache__/
+.pytest_cache/
+dist/
+*.tar

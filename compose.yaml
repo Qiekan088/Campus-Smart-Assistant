@@ -1,0 +1,55 @@
+name: campus-qa
+services:
+  frontend:
+    image: campus-qa-frontend:env-0.2
+    build: ./app/frontend
+    ports: ["127.0.0.1:5173:5173"]
+    environment:
+      API_PROXY_TARGET: http://backend:8000
+    volumes:
+      - ./app/frontend/src:/workspace/src
+      - ./app/frontend/index.html:/workspace/index.html
+      - ./app/frontend/vite.config.ts:/workspace/vite.config.ts
+      - ./app/frontend/tsconfig.json:/workspace/tsconfig.json
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:5173').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+    depends_on:
+      backend:
+        condition: service_healthy
+  backend:
+    image: campus-qa-backend:env-0.2
+    build: ./app/backend
+    ports: ["127.0.0.1:8000:8000"]
+    environment:
+      SESSION_TTL_SECONDS: "7200"
+      REQUEST_TIMEOUT_SECONDS: "10"
+
+    volumes: ["./app/backend:/workspace"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health', timeout=2)"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+  db:
+    profiles: ["database"]
+    entrypoint: ["sh", "-c", "test -n \"$$MYSQL_PASSWORD\" && test -n \"$$MYSQL_ROOT_PASSWORD\" || { echo 'Set nonempty MYSQL_PASSWORD and MYSQL_ROOT_PASSWORD in .env' >&2; exit 1; }; exec docker-entrypoint.sh mysqld"]
+    image: mysql:8.4.4@sha256:23818b7d7de427096ab1427b2e3d9d5e14a5b933f9a4431a482d6414bc879091
+    environment:
+      MYSQL_DATABASE: campus_qa
+      MYSQL_USER: campus_app
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-}
+    volumes: ["mysql_data:/var/lib/mysql"]
+    healthcheck:
+      test: ["CMD-SHELL", "MYSQL_PWD=$$MYSQL_ROOT_PASSWORD mysql -h 127.0.0.1 -uroot -e 'SELECT 1' >/dev/null 2>&1"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+volumes:
+  mysql_data:
+
+
+
