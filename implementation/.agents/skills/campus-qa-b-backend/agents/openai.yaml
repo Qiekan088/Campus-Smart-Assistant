@@ -1,0 +1,4 @@
+interface:
+  display_name: "B 业务后端与数据库"
+  short_description: "校园事务问答项目B 业务后端与数据库职责与V0至V3阶段协作和文档维护"
+  default_prompt: "使用 $campus-qa-b-backend 读取项目基线，说明当前阶段任务、依赖及需要协商的问句。"

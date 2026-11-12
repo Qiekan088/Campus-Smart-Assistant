@@ -1,0 +1,4 @@
+interface:
+  display_name: "A 前端工程"
+  short_description: "校园事务问答项目A 前端工程职责与V0至V3阶段协作和文档维护"
+  default_prompt: "使用 $campus-qa-a-frontend 读取项目基线，说明当前阶段任务、依赖及需要协商的问句。"
